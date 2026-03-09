@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Quiz</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f2f2f2;
+text-align:center;
+}
+
+.container{
+background:white;
+width:420px;
+margin:auto;
+margin-top:80px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+
+button{
+padding:10px;
+margin:5px;
+background:blue;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 id="question">Question</h2>
+
+<div id="answers"></div>
+
+<h3 id="score"></h3>
+
+</div>
+
+<script>
+
+let quiz = [
+
+{
+question:"What does HTML stand for?",
+answers:["Hyper Text Markup Language","High Text Machine Language","Hyper Tool Multi Language","None"],
+correct:0
+},
+
+{
+question:"Which language is used for styling websites?",
+answers:["HTML","Python","CSS","Java"],
+correct:2
+},
+
+{
+question:"Which language is used for website interactivity?",
+answers:["JavaScript","C++","Java","Python"],
+correct:0
+},
+
+{
+question:"Which tag is used to create a hyperlink in HTML?",
+answers:["<link>","<a>","<href>","<url>"],
+correct:1
+},
+
+{
+question:"Which HTML tag is used to display an image?",
+answers:["<img>","<image>","<pic>","<src>"],
+correct:0
+},
+
+{
+question:"Which CSS property changes text color?",
+answers:["font-style","text-color","color","background"],
+correct:2
+},
+
+{
+question:"Which company developed JavaScript?",
+answers:["Microsoft","Netscape","Google","Oracle"],
+correct:1
+},
+
+{
+question:"Which HTML tag is used for the largest heading?",
+answers:["<h6>","<h3>","<h1>","<head>"],
+correct:2
+},
+
+{
+question:"Which symbol is used for comments in JavaScript?",
+answers:["//","<!-- -->","##","**"],
+correct:0
+},
+
+{
+question:"Which method is used to print output in browser console?",
+answers:["console.print()","print()","console.log()","log.console()"],
+correct:2
+}
+
+];
+
+let current=0;
+let score=0;
+
+function loadQuestion(){
+
+let q=quiz[current];
+
+document.getElementById("question").innerText="Q"+(current+1)+": "+q.question;
+
+let answersDiv=document.getElementById("answers");
+answersDiv.innerHTML="";
+
+q.answers.forEach(function(ans,index){
+
+let btn=document.createElement("button");
+btn.innerText=ans;
+
+btn.onclick=function(){
+checkAnswer(index);
+};
+
+answersDiv.appendChild(btn);
+
+});
+
+}
+
+function checkAnswer(index){
+
+if(index===quiz[current].correct){
+score++;
+}
+
+current++;
+
+if(current<quiz.length){
+loadQuestion();
+}
+else{
+document.getElementById("question").innerText="Quiz Finished";
+document.getElementById("answers").innerHTML="";
+document.getElementById("score").innerText="Your Score: "+score+" / "+quiz.length;
+}
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
